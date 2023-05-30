@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model link {
+  id          Int         @id @default(autoincrement())
+  group_id    Int
+  title       String      @db.VarChar(100)
+  icon        String?     @db.VarChar(100)
+  url         String      @db.VarChar(100)
+  order_list  Int
+  updated_at  DateTime    @default(now()) @db.Timestamp(0)
+  created_at  DateTime    @default(now()) @db.Timestamp(0)
+  link__group link__group @relation(fields: [group_id], references: [id], onUpdate: Restrict, map: "group_id")
+
+  @@index([group_id], map: "group_id")
+}
+
+model link__group {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  name       String   @db.VarChar(10)
+  path       String   @db.VarChar(10)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  link       link[]
+  user       user     @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "user_id")
+
+  @@index([user_id], map: "user_id")
+}
+
+model role {
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(15)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  user       user[]
+}
+
+model user {
+  id          Int           @id @default(autoincrement())
+  username    String        @db.VarChar(15)
+  name        String        @db.VarChar(80)
+  email       String        @db.VarChar(80)
+  password    String        @db.VarChar(500)
+  role_id     Int
+  img         String?       @db.VarChar(80)
+  verified    Boolean       @default(false)
+  verified_at DateTime?     @db.Timestamp(0)
+  updated_at  DateTime      @default(now()) @db.Timestamp(0)
+  created_at  DateTime      @default(now()) @db.Timestamp(0)
+  link__group link__group[]
+  role        role          @relation(fields: [role_id], references: [id], onUpdate: Restrict, map: "role_id")
+
+  @@unique([username, email], map: "username")
+  @@index([role_id], map: "role_id")
+}
