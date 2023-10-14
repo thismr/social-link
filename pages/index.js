@@ -142,7 +142,7 @@ export async function getServerSideProps(context) {
       role: true,
     },
   });
-  console.log(getUser);
+  // console.log(getUser);
   // console.log(cryptr.encrypt("admin"));
   return {
     props: { hasil: cryptr.encrypt("admin") }, // will be passed to the page component as props

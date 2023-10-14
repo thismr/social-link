@@ -56,7 +56,7 @@ export function SignIn({ user }) {
       .then((res) => {
         setIsLoading(false);
         alert("Link added!");
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -72,7 +72,7 @@ export function SignIn({ user }) {
       if (!selectedImage) return;
       const formData = new FormData(event.target);
       const { data } = await axios.post("/api/upload/image", formData);
-      console.log(data);
+      // console.log(data);
       refreshData();
     } catch (err) {
       console.error(err.response.data);
