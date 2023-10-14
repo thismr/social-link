@@ -14,7 +14,12 @@ export const config = {
 const readFile = (req, saveLocally) => {
   const options = {};
   if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/upload");
+    if (process.env.NODE_ENV === "development") {
+      options.uploadDir = path.join(process.cwd(), "/public/upload");
+    } else {
+      options.uploadDir = path.join("/tmp", "/public/upload");
+    }
+
     options.filename = (name, ext, path, form) => {
       return Date.now().toString() + "_" + path.originalFilename;
     };
@@ -47,9 +52,17 @@ export default async function handle(req, res) {
     });
 
     try {
-      await fs.readdir(path.join(process.cwd() + "/public", "/upload"));
+      if (process.env.NODE_ENV === "development") {
+        await fs.readdir(path.join(process.cwd(), "/public", "/upload"));
+      } else {
+        await fs.readdir(path.join("/tmp", "/public", "/upload"));
+      }
     } catch (error) {
-      await fs.mkdir(path.join(process.cwd() + "/public", "/upload"));
+      if (process.env.NODE_ENV === "development") {
+        await fs.mkdir(path.join(process.cwd(), "/public", "/upload"));
+      } else {
+        await fs.mkdir(path.join("/tmp", "/public", "/upload"));
+      }
     }
 
     const data = await readFile(req, true).then((res) => {
