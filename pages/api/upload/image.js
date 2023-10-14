@@ -17,7 +17,7 @@ const readFile = (req, saveLocally) => {
     if (process.env.NODE_ENV === "development") {
       options.uploadDir = path.join(process.cwd(), "/public/upload");
     } else {
-      options.uploadDir = path.join(__dirname, "/public/upload");
+      options.uploadDir = path.join(__dirname, "../../../public/upload");
     }
 
     options.filename = (name, ext, path, form) => {
@@ -55,13 +55,13 @@ export default async function handle(req, res) {
       if (process.env.NODE_ENV === "development") {
         await fs.readdir(path.join(process.cwd(), "/public", "/upload"));
       } else {
-        await fs.readdir(path.join(__dirname, "/public", "/upload"));
+        await fs.readdir(path.join(__dirname, "../../../public", "/upload"));
       }
     } catch (error) {
       if (process.env.NODE_ENV === "development") {
         await fs.mkdir(path.join(process.cwd(), "/public", "/upload"));
       } else {
-        await fs.mkdir(path.join(__dirname, "/public", "/upload"));
+        await fs.mkdir(path.join(__dirname, "../../../public", "/upload"));
       }
     }
 
