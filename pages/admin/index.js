@@ -57,6 +57,11 @@ export function SignIn({ user }) {
         setIsLoading(false);
         alert("Link added!");
         console.log(res);
+      })
+      .catch((err) => {
+        setIsLoading(false);
+        alert(`Failed : ${err.response.data.msg}`);
+        console.log(err);
       });
   }
 
@@ -75,13 +80,19 @@ export function SignIn({ user }) {
     setButtonLoading(false);
   }
 
+  // const cookie = new Cookies();
+  // console.log(cookie.get("auth"));
+  // useEffect(() => {
+  //   console.log(cookie.get("auth"));
+  // });
+
   return (
     <>
       {/* Form */}
       <Container>
         <Navbar isLoggedIn={true} user={user} />
         <div className="flex-row md:flex md:flex-row-reverse max-w-7xl h-full space-y-5 md:space-y-0 space-x-0 md:space-x-5 justify-between items-start xl:mx-28 z-10">
-          <div className="flex-row w-full h-full justify-center items-center pt-32 md:w-1/2 space-y-10 px-2 md:px-20">
+          <div className="flex-row w-full h-full justify-center items-center md:w-1/2 space-y-10 px-2 md:px-20">
             <div className="flex justify-center items-center">
               {image || user.img ? (
                 <img
@@ -124,7 +135,7 @@ export function SignIn({ user }) {
               </div>
             </form>
           </div>
-          <div className="flex-row w-full h-full md:pt-28 pb-10 md:w-1/2 space-y-5 px-2 md:px-0">
+          <div className="flex-row w-full h-full pb-10 md:w-1/2 space-y-5 px-2 md:px-0">
             <div
               onClick={() => {
                 if (!showInput) setShowInput(true);

@@ -3,6 +3,7 @@ import { Navbar } from "@/components/organism/navbar";
 import Cookies from "cookies";
 import Cryptr from "cryptr";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import React, { useRef, useState } from "react";
 const { createHash } = require("crypto");
 
@@ -60,17 +61,19 @@ export function SignIn() {
 
   return (
     <>
+      <Script async src="https://cse.google.com/cse.js?cx=914eab76053bc4ece" />
       {/* Navbar */}
-      <Navbar />
 
       {/* Form */}
       <Container>
-        <div className="flex w-full h-screen justify-center items-center">
+        <Navbar />
+        <div className="flex w-full h-screen justify-center items-start">
           <div className="flex-row w-full md:w-min p-10 mx-2 md:mx-0 bg-white bg-opacity-70 backdrop-blur-sm rounded-3xl ">
             <div className="flex-row mb-5 text-gray-800">
               <div>
                 <h1 className="text-3xl font-bold">Log In</h1>
                 <span className="text-sm opacity-50 ">
+                  <div className="gcse-searchbox-only z-20"></div>
                   Please, log in to your account.
                 </span>
               </div>

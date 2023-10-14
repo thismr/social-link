@@ -26,6 +26,12 @@ export default async function handle(req, res) {
     if (group.user.email !== cryptr.decrypt(email))
       return res.status(400).json({ code: 400, msg: "invalid token" });
 
+    //if not verified user & created link more than 1
+    if (!group.user.verified && link >= 5)
+      return res
+        .status(403)
+        .json({ code: 403, msg: "not verified email, only create 5 links" });
+
     const create = await prisma.link.create({
       data: {
         link__group: { connect: { id: group.id } },

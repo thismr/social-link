@@ -70,7 +70,7 @@ export function SignUp() {
 
       {/* Form */}
       <Container>
-        <div className="flex w-full h-screen justify-center items-center">
+        <div className="flex w-full h-screen justify-center items-start">
           <div className="flex-row w-full md:w-min p-10 mx-2 md:mx-0 bg-white bg-opacity-70 backdrop-blur-sm rounded-3xl ">
             <div className="flex-row mb-5 text-gray-800">
               <div>

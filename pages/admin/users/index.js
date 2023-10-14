@@ -40,14 +40,14 @@ export function Users({ user, users }) {
       <Container>
         <Navbar isLoggedIn={true} user={user} />
         <div className="flex max-w-7xl h-screen space-x-5 justify-center items-start xl:mx-28 z-10">
-          <div className="flex-row w-full md:w-4/5 h-full pt-28 pb-10  space-y-5 mx-2 md:mx-0 text-white">
+          <div className="flex-row w-full h-full pb-10  space-y-5 mx-2 md:mx-10 text-white">
             <div className="flex w-full items-center text-gray-800 px-2 sm:px-0">
               <input
                 type="text"
                 name="search"
                 id="search"
                 placeholder="Search"
-                className="focus:outline-none px-3 py-2 rounded-full  bg-white bg-opacity-50 w-full sm:w-1/2 lg:w-1/4 "
+                className="focus:outline-none px-3 py-2 rounded-full placeholder:text-gray-800 bg-white bg-opacity-50 w-full sm:w-1/2 lg:w-1/4 "
                 onInput={(e) => {
                   setInput(e.target.value);
                 }}

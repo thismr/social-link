@@ -22,7 +22,7 @@ export default async function handle(req, res) {
     const encryptedEmail = cryptr.encrypt(email);
     if (pass === cryptr.decrypt(user.password)) {
       const cookies = new Cookies(req, res);
-      cookies.set("auth", encryptedEmail);
+      cookies.set("auth", encryptedEmail, { maxAge: 18e5 });
       return res.redirect("/admin");
     } else {
       return res.redirect("/auth/login?error=Incorrect email or password");
