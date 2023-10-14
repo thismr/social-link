@@ -1,5 +1,6 @@
 import { Container } from "@/components/molecules/container";
 import { Navbar } from "@/components/organism/navbar";
+import prisma from "@/lib/prisma/prisma";
 import { UserIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
 import { useRouter } from "next/router";
